@@ -12,4 +12,4 @@ jobs:
         uses: k6io/action@v0.1
         with:
           filename: test.js
-          out: influxdb=http://178.170.219.38:8086/k6db
+          flags: --out influxdb=http://178.170.219.38:8086/k6db
