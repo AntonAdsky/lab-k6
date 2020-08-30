@@ -3,6 +3,40 @@ name: Main Workflow
 on: [push]
 jobs:
   build:
+      runs-on: ubuntu-latest
+      outputs:
+        output_port: ${{ steps.port.outputs.testport }}
+      steps:
+      - uses: actions/checkout@v1
+      
+      - name: Login to Heroku Container registry
+        env: 
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+      
+      - name: Build and push
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web 
+      
+      - name: Release
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web
+      
+      - name: Sleep
+        run: sleep 30
+      
+      - id: port
+        name: Check port
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: echo ::set-output name=testport::$(heroku logs -n 3 -a dummyload |  grep -o 'Running on this port [0-9]\+' | sed -e 's/[^0-9]//g')
+      
+      - name: Echo steps.port.outputs.testport
+        run: echo "${{steps.port.outputs.testport}}"
+
+  loadtest:
     name: Run k6 test
     runs-on: ubuntu-latest
     steps:
