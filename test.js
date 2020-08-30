@@ -9,7 +9,7 @@ export let options = {
       executor: 'constant-arrival-rate',
       rate: 100,
       timeUnit: '1m',
-      duration: '10m',
+      duration: '1m',
       gracefulStop: '0s',
       preAllocatedVUs: 5,
       maxVUs: 10,
@@ -40,7 +40,7 @@ export function make_order() {
     'is status 200': (r) => r.status === 200,
   });
 
-  let resOrder = http.post(url + 'api/orders', payload, params);
+  let resOrder = http.post(url + '/orders', payload, params);
   check(resOrder, {
     'is status 200': (r) => r.status === 200,
   });
