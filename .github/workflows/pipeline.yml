@@ -46,11 +46,12 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
-        
+
       - name: Run k6 local test
         uses: k6io/action@v0.1
         with:
           filename: test.js
           flags: --out influxdb=http://178.170.219.38:8086/k6db
+        env:
           HOST: afternoon-bayou-99206.herokuapp.com
           PORT: ${{ needs.build.outputs.output_port }}
