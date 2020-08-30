@@ -8,7 +8,7 @@ export let options = {
     make_order: {
       executor: 'constant-arrival-rate',
       rate: 100,
-      timeUnit: '1m',
+      timeUnit: '1s',
       duration: '1m',
       gracefulStop: '0s',
       preAllocatedVUs: 5,
