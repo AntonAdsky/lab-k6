@@ -45,3 +45,5 @@ jobs:
         with:
           filename: test.js
           flags: --out influxdb=http://178.170.219.38:8086/k6db
+          HOST: afternoon-bayou-99206.herokuapp.com
+          PORT: ${{ needs.build.outputs.output_port }}
