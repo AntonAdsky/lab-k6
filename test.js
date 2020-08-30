@@ -1,7 +1,8 @@
 import http from 'k6/http';
 import { check } from 'k6';
 
-const host = `${__ENV.HOST}` ||'localhost';
+const host = `${__ENV.HOST}` ||'localhost:';
+const port = ``;
 
 export let options = {
   scenarios: {
@@ -20,7 +21,7 @@ export let options = {
 };
 
 export function make_order() {
-  var url = host;
+  var url = "https://" + host;
 
   var payload = JSON.stringify({
     adress: '',
