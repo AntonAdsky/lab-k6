@@ -1,8 +1,7 @@
 import http from 'k6/http';
 import { check } from 'k6';
 
-const host = `${__ENV.HOST}` ||'localhost:';
-const port = ``;
+const host = 'localhost';
 
 export let options = {
   scenarios: {
