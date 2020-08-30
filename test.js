@@ -11,8 +11,8 @@ export let options = {
       timeUnit: '1s',
       duration: '1m',
       gracefulStop: '0s',
-      preAllocatedVUs: 5,
-      maxVUs: 10,
+      preAllocatedVUs: 50,
+      maxVUs: 100,
       exec: 'make_order'
      },
 
